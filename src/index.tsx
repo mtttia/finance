@@ -4,13 +4,30 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import store from './app/store'
+import { Provider } from 'react-redux'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
+import LoadScreen from './routes/loadScreen';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/app' element={<App />} />
+          <Route path='/' element={<LoadScreen />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

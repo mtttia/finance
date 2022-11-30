@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from './app/store';
+import { increment } from './features/counterSlice';
+import Navbar from './components/navbar';
+import MobileDrawer from './components/mobileDrawer';
 
-function App() {
+function App()
+{
+  const counter = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  useEffect(() =>
+  {
+    setTimeout(() => {
+      dispatch(increment());
+    }, 1000);
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar openMenu={() => {setDrawerOpen(true)}} />
+      <MobileDrawer isOpen={drawerOpen} onClose={()=>{setDrawerOpen(false)}} />
+      <p>
+        {counter}
+      </p>
     </div>
   );
 }
