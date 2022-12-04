@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Navbar from './components/navbar';
 import MobileDrawer from './components/mobileDrawer';
 import { NavigationBar } from './components/navigationBar.jsx';
+import FloatingActionButton from './components/FloatingActionButton';
 
 function App()
 {   
@@ -14,7 +15,8 @@ function App()
   return (
     <div className="App">
       <Navbar openMenu={() => {setDrawerOpen(true)}} />
-      <MobileDrawer isOpen={drawerOpen} onClose={()=>{setDrawerOpen(false)}} />
+      <MobileDrawer isOpen={drawerOpen} onClose={() => { setDrawerOpen(false) }} />
+      <FloatingActionButton />
       <NavigationBar/>
     </div>
   );
