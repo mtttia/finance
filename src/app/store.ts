@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterSlice from './../features/counterSlice';
+import countsSlice from '../features/counts';
+import actionsSlice from '../features/actions';
 
 const persistedState = localStorage.getItem('state') 
   ? JSON.parse(localStorage.getItem('state') as string)
@@ -7,7 +8,8 @@ const persistedState = localStorage.getItem('state')
 
 const store = configureStore({
   reducer: {
-    counter: counterSlice
+    counts: countsSlice,
+    actions: actionsSlice
   },
   preloadedState:persistedState
 })
